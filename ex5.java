@@ -1,25 +1,29 @@
 import java.io.* ;
-import java.util.* ;
 
-class ReverserVersion1
+class Smooth
 {
 
-  public static void main ( String[] args ) 
+  public static void main ( String[] args )  
   {
-    int[] data = {1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-    List<Integer> reversed = new ArrayList<Integer>();
+    int[] signal  = {5, 5, 4, 5, 6, 6, 7, 6, 5, 4, 1, 4};
+    int[] smooth;
+    smooth = new int[signal.length];
     
-    // reverse the data
-    for ( int j=0; j < data.length; j++)
+    // compute the smoothed value for each
+    //  cell of the array smooth
+    smooth[0]  =  (signal[0] + signal[1]) / 2;
+    smooth[ signal.length-1 ] = (signal[signal.length-1 ] + signal[signal.length - 2 ]) / 2;
+
+    for ( int j=1; j < signal.length - 1; j++ )
     {
-      reversed.add(data[data.length - 1 - j]);
+      smooth[j] = (signal[j - 1] + signal[j] + signal[j + 1]) / 3;
     }
       
-    // write out the new data
-    for ( int j=0; j < data.length; j++)
+    // write out the input
+    for ( int j=0; j < smooth.length; j++)
     {
-      System.out.println(reversed.get(j));
+      System.out.println(smooth[j]);
     }
 
   }
-}  
+}   
